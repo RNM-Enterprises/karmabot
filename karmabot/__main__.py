@@ -8,7 +8,7 @@ intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 
-bot = commands.Bot(command_prefix="!", intents=intents)
+bot = commands.Bot(command_prefix=">", intents=intents)
 logger = logging.getLogger("discord.karmabot")
 
 
@@ -19,7 +19,7 @@ async def on_ready():
 
 
 @bot.command()
-async def ping(ctx):
+async def ping(ctx: commands.Context):
     await ctx.send("pong!")
 
 
