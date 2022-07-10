@@ -15,21 +15,15 @@ async def on_ready():
     print(f"logged in, bot ready")
 
 
-@bot.command
+@bot.command()
 async def ping(ctx):
     await ctx.send("pong!")
 
 
-@bot.event
-async def on_message(msg: discord.Message):
-    content = msg.content.lower()
-    if (
-        content.startswith("i am")
-        or content.startswith("i'm")
-        or content.startswith("im")
-    ):
-        msg.reply(f"hello, {msg.author}, I'm a bot!")
-
-
 load_dotenv()
-bot.run(os.getenv("BOT_TOKEN"))
+token = os.getenv("BOT_TOKEN")
+
+if token is None:
+    print("bot token not found")
+else:
+    bot.run(token)
