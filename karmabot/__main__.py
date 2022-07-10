@@ -2,17 +2,20 @@ from dotenv import load_dotenv
 import discord
 from discord.ext import commands
 import os
+import logging
 
 intents = discord.Intents.default()
 intents.members = True
 intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
+logger = logging.getLogger("discord.karmabot")
 
 
 @bot.event
 async def on_ready():
-    print(f"logged in, bot ready")
+    assert bot.user is not None
+    logger.info(f"Logged in as {bot.user} (ID: {bot.user.id})")
 
 
 @bot.command()
@@ -24,6 +27,6 @@ load_dotenv()
 token = os.getenv("BOT_TOKEN")
 
 if token is None:
-    print("bot token not found")
+    logger.critical("Environment variable BOT_TOKEN not set, exiting")
 else:
-    bot.run(token)
+    bot.run(token, log_level=logging.INFO)
