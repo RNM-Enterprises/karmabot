@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "karmabot"
+version = "0.1.0"
+description = ""
+authors = ["Joey Harrison <joeyh021@icloud.com>"]
+license = "GPL"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+"discord.py" = { git = "https://github.com/Rapptz/discord.py" }
+python-dotenv = "^0.20.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.6.0"
+pytest = "^7.1.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
