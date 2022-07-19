@@ -4,6 +4,6 @@ from karma_store import KarmaStore
 
 
 class Listeners(commands.Cog):
-    def __init__(self, bot,karma_store):
+    def __init__(self, bot, karma_store):
         self.bot = bot
         self.karma_store = karma_store
