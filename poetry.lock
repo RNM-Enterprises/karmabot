@@ -1,4 +1,18 @@
 [[package]]
+name = "aiofile"
+version = "3.7.4"
+description = "Asynchronous file operations."
+category = "main"
+optional = false
+python-versions = ">3.4.*, <4"
+
+[package.dependencies]
+caio = ">=0.9.0,<0.10.0"
+
+[package.extras]
+develop = ["aiomisc", "asynctest", "pytest", "pytest-cov"]
+
+[[package]]
 name = "aiohttp"
 version = "3.8.1"
 description = "Async http client/server framework (asyncio)"
@@ -79,6 +93,17 @@ colorama = ["colorama (>=0.4.3)"]
 d = ["aiohttp (>=3.7.4)"]
 jupyter = ["ipython (>=7.8.0)", "tokenize-rt (>=3.2.0)"]
 uvloop = ["uvloop (>=0.15.2)"]
+
+[[package]]
+name = "caio"
+version = "0.9.6"
+description = "Asynchronous file IO for Linux MacOS or Windows."
+category = "main"
+optional = false
+python-versions = ">=3.5, <4"
+
+[package.extras]
+develop = ["aiomisc", "pytest", "pytest-cov"]
 
 [[package]]
 name = "charset-normalizer"
@@ -317,6 +342,10 @@ python-versions = "^3.10"
 content-hash = "b587c268ba599087aed45a2c65d78516a5c4dd5b125a3a70ad79c64a67bf6d4a"
 
 [metadata.files]
+aiofile = [
+    {file = "aiofile-3.7.4-py3-none-any.whl", hash = "sha256:0e2a524e4714efda47ce8964b13d4da94cf553411f9f6da813df615a4cd73d95"},
+    {file = "aiofile-3.7.4.tar.gz", hash = "sha256:0aefa1d91d000d3a20a515d153db2ebf713076c7c94edf2fca85d3d83316abc5"},
+]
 aiohttp = [
     {file = "aiohttp-3.8.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:1ed0b6477896559f17b9eaeb6d38e07f7f9ffe40b9f0f9627ae8b9926ae260a8"},
     {file = "aiohttp-3.8.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:7dadf3c307b31e0e61689cbf9e06be7a867c563d5a63ce9dca578f956609abf8"},
@@ -430,6 +459,19 @@ black = [
     {file = "black-22.6.0-cp39-cp39-win_amd64.whl", hash = "sha256:4af5bc0e1f96be5ae9bd7aaec219c901a94d6caa2484c21983d043371c733fc4"},
     {file = "black-22.6.0-py3-none-any.whl", hash = "sha256:ac609cf8ef5e7115ddd07d85d988d074ed00e10fbc3445aee393e70164a2219c"},
     {file = "black-22.6.0.tar.gz", hash = "sha256:6c6d39e28aed379aec40da1c65434c77d75e65bb59a1e1c283de545fb4e7c6c9"},
+]
+caio = [
+    {file = "caio-0.9.6-cp310-cp310-macosx_10_15_universal2.whl", hash = "sha256:68507b23b2e0927a600e304ee455d5a4890ba7abcc8da9c169c1ff76667d73d4"},
+    {file = "caio-0.9.6-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:c702e86c7f446d69353e335de6c11ae9291b4408a1a510b3a7150e67576b0943"},
+    {file = "caio-0.9.6-cp36-cp36m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:fb499c23e03894a0f6d055d393087785b4b1578fe883f5da56d95ecf737365e6"},
+    {file = "caio-0.9.6-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:1e4adf1eb501f9b11c64bf92714c3b85f4f5fa7b804ddb48bd5cb5263b7bd168"},
+    {file = "caio-0.9.6-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:2d9f74792606c0210ac81cb08451bcd4fa8f5857cef01eec1c7fa748f4283cd5"},
+    {file = "caio-0.9.6-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:3c6f233dd3a6072c19738650fb11cfb0b02ed675fea4631ab8ae9e214fe2259d"},
+    {file = "caio-0.9.6-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:ea0e87d1206acd8954ac08eb24fef8b0e3475fd12f9b521325561bda723a324e"},
+    {file = "caio-0.9.6-cp39-cp39-macosx_10_15_x86_64.whl", hash = "sha256:c10e9b8dca38b262b536b421c2036d55c382497d85ac57426df6c86934b4e479"},
+    {file = "caio-0.9.6-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:395c56a052157453144e39f71e39120c48975b9b810779145c4c961c1f2776b5"},
+    {file = "caio-0.9.6-py3-none-any.whl", hash = "sha256:3e78159be5ccd070a0d7bcb4f0d60bbe5dd4970aa928218f6899f6e112cc963e"},
+    {file = "caio-0.9.6.tar.gz", hash = "sha256:a0c2111ec0fe94f8ed873d36d33344b765cd047855408faa9513e549070d3cf4"},
 ]
 charset-normalizer = [
     {file = "charset-normalizer-2.1.0.tar.gz", hash = "sha256:575e708016ff3a5e3681541cb9d79312c416835686d054a23accb873b254f413"},

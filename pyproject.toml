@@ -9,6 +9,7 @@ license = "GPL"
 python = "^3.10"
 "discord.py" = { git = "https://github.com/Rapptz/discord.py" }
 python-dotenv = "^0.20.0"
+aiofile = "^3.7.4"
 
 [tool.poetry.dev-dependencies]
 black = "^22.6.0"
