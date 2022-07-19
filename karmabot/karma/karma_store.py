@@ -1,4 +1,5 @@
 import pickle as pkl
+from typing import Iterator
 from aiofile import async_open
 from discord.ext import tasks
 from os import path
@@ -18,6 +19,26 @@ class KarmaStore(MutableMapping[int, int]):
 
         self.bgsave.change_interval(minutes=interval)
         self.bgsave.start()
+
+    # dunder methods for implementing interface
+    # just forward to underlying store
+
+    def __getitem__(self, k: int) -> int:
+        return self.__store.__getitem__(k)
+
+    def __setitem__(self, k: int, v: int):
+        self.__store.__setitem__(k, v)
+
+    def __delitem__(self, k: int):
+        self.__store.__delitem__(k)
+
+    # note - not usual dict behavour
+    # why? because this is nicer imho :) (cope)
+    def __iter__(self) -> Iterator[tuple[int, int]]:
+        return self.__store.items().__iter__()
+
+    def __len__(self) -> int:
+        return self.__store.__len__()
 
     async def save(self):
         """
