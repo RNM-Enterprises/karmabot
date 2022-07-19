@@ -1,4 +1,5 @@
 import asyncio
+from sys import stdout
 from dotenv import load_dotenv
 import discord
 from discord.ext import commands
@@ -14,7 +15,9 @@ async def main():
     intents.message_content = True
 
     bot = commands.Bot(command_prefix=">", intents=intents)
-    logger = logging.getLogger("discord.karmabot")
+    logger = logging.getLogger("discord")
+    logger.setLevel(logging.INFO)
+    logger.addHandler(logging.StreamHandler(stream=stdout))
 
     # load extensions
     for cog in COGS:

@@ -7,10 +7,9 @@ from collections.abc import MutableMapping
 
 
 class KarmaStore(MutableMapping[int, int]):
-    __store: dict[int, int]
-
     def __init__(self, filename: str, interval: int = 1):
         self.filename = filename
+        self.__store: dict[int, int] = dict()
 
         # load internal state if file already exists
         if path.exists("filename"):
