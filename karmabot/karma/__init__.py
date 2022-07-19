@@ -1,4 +1,4 @@
-from karmabot.karma.karma_store import KarmaStore
+from karma_store import KarmaStore
 from .admin_commands import AdminCommands
 from .listeners import Listeners
 from .user_commands import UserCommands

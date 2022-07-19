@@ -1,6 +1,6 @@
 import discord.ext.commands as commands
 
-from karma import karma_store
+from karma_store import KarmaStore
 
 
 class UserCommands(commands.Cog):
