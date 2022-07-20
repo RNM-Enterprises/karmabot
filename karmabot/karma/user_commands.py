@@ -17,3 +17,9 @@ class UserCommands(commands.Cog):
         await ctx.reply(
             f"{ctx.author}'s karma isnt {self.karma_store.get(int(ctx.author.id))}"
         )
+
+    @commands.command()
+    async def leaderboard(self,ctx:commands.Context):
+        pass
+
+    
