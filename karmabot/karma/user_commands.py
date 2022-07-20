@@ -1,10 +1,10 @@
 import discord.ext.commands as commands
 
-from karma_store import KarmaStore
+from .karma_store import KarmaStore
 
 
 class UserCommands(commands.Cog):
-    def __init__(self, bot, karma_store):
+    def __init__(self, bot: commands.Bot, karma_store: KarmaStore):
         self.bot = bot
         self.karma_store = karma_store
 
