@@ -7,6 +7,7 @@ import os
 import logging
 
 COGS = ["karma", "ping_pong"]
+OWNERS = [246935175793999873]  # add your user id here to use admin commands
 
 
 async def main():
@@ -14,7 +15,7 @@ async def main():
     intents.members = True
     intents.message_content = True
 
-    bot = commands.Bot(command_prefix=">", intents=intents)
+    bot = commands.Bot(command_prefix=">", owner_ids=set(OWNERS), intents=intents)
     logger = logging.getLogger("discord")
     logger.setLevel(logging.INFO)
     logger.addHandler(logging.StreamHandler(stream=stdout))
