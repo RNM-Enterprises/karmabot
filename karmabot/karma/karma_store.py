@@ -20,10 +20,15 @@ class KarmaStore(MutableMapping[int, int]):
         self.bgsave.start()
 
     # dunder methods for implementing interface
-    # just forward to underlying store
 
+    # note - not usual dict behaviour
+    # want this to be exception safe for a slightly nicer interface
     def __getitem__(self, k: int) -> int:
-        return self.__store.__getitem__(k)
+        try:
+            return self.__store.__getitem__(k)
+        except KeyError:
+            self.__store.__setitem__(k, 0)
+            return self.__store.__getitem__(k)
 
     def __setitem__(self, k: int, v: int):
         self.__store.__setitem__(k, v)

@@ -11,9 +11,6 @@ class UserCommands(commands.Cog):
     @commands.command()
     async def karma(self, ctx: commands.Context):
         """
-        Tells you your fake karma (because real karma doesnt exist yet)
+        Tells you your karma
         """
-        self.karma_store[int(ctx.author.id)] += 1
-        await ctx.reply(
-            f"{ctx.author}'s karma isnt {self.karma_store.get(int(ctx.author.id))}"
-        )
+        await ctx.reply(f"{ctx.author}'s karma is {self.karma_store[ctx.author.id]}")
