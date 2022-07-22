@@ -3,6 +3,7 @@ import discord
 from .karma_store import KarmaStore
 from karmabot import KarmaBot
 from typing import Optional
+import logging
 
 # need to use raw reaction events
 # see docs (https://discordpy.readthedocs.io/en/latest/api.html#discord.on_raw_reaction_add)
@@ -33,12 +34,20 @@ class Listeners(commands.Cog):
             self.__karma_store[message.author.id] -= value
 
     @commands.Cog.listener()
-    async def on_raw_reaction_clear(self, event: discord.RawReactionActionEvent):
-        pass
+    async def on_raw_reaction_clear(self, event: discord.RawReactionClearEvent):
+        message = await self.__get_message(event)
+        logging.info(
+            f"Reactions cleared for message {message.jump_url}. Karma has not been affected"
+        )
 
     @commands.Cog.listener()
-    async def on_raw_reaction_emoji(self, event: discord.RawReactionActionEvent):
-        pass
+    async def on_raw_reaction_clear_emoji(
+        self, event: discord.RawReactionClearEmojiEvent
+    ):
+        message = await self.__get_message(event)
+        logging.info(
+            f"Reactions for emoji '{event.emoji.name}' cleared for message {message.jump_url}. Karma has not been affected"
+        )
 
     # helper to get message from raw reaction event
     async def __get_message(
