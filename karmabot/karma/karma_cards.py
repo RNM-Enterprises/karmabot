@@ -17,7 +17,7 @@ async def get_karma_card(user: discord.abc.User,user_karma:int ):
         card_drawer.text((320,84), str(user),font=font,fill=(245,249,215))
         
         font = ImageFont.truetype(font='arial.ttf',size=74)
-        card_drawer.text((320,card.size[1] -(74+44)), f'karma: {user_karma}',font=font,fill=(250,219,47))
+        card_drawer.text((320,card.size[1] -(74+44)), f'Karma: {user_karma}',font=font,fill=(250,219,47))
         
         avatar = Image.open(await user.display_avatar.read()).convert('RGB').resize((234,234))
         avatar_arr = np.array(avatar)
