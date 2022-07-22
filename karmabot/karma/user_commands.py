@@ -57,5 +57,7 @@ class UserCommands(commands.Cog):
     @commands.command()
     async def leaderboard(self,ctx:commands.Context):
         pass
-
     
+    @commands.command()
+    async def thisdoesntexistyet(self, ctx:commands.Context):
+        await ctx.channel.send("huh? well it does now...")
