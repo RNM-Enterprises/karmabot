@@ -3,3 +3,4 @@ __pycache__
 .env
 *_cache
 *.pkl
+config.yaml

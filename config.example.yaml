@@ -1,0 +1,2 @@
+bot-token: bot_token_goes_here
+owners: [1234, 5678] # user IDs of bot owners with admin perms
