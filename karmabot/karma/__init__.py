@@ -2,10 +2,10 @@ from .karma_store import KarmaStore
 from .admin_commands import AdminCommands
 from .listeners import Listeners
 from .user_commands import UserCommands
-from discord.ext.commands import Bot
+from karmabot import KarmaBot
 
 
-async def setup(bot: Bot):
+async def setup(bot: KarmaBot):
 
     karma_store = KarmaStore("karmastore.pkl")
 

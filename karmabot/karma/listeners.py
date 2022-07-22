@@ -1,26 +1,36 @@
 from discord.ext import commands
 import discord
 from .karma_store import KarmaStore
+from karmabot import KarmaBot
+from typing import Optional
 
 # need to use raw reaction events
 # see docs (https://discordpy.readthedocs.io/en/latest/api.html#discord.on_raw_reaction_add)
 
+RawReact = (
+    discord.RawReactionActionEvent
+    | discord.RawReactionClearEvent
+    | discord.RawReactionClearEmojiEvent
+)
+
 
 class Listeners(commands.Cog):
-    def __init__(self, bot: commands.Bot, karma_store: KarmaStore):
+    def __init__(self, bot: KarmaBot, karma_store: KarmaStore):
         self.__bot = bot
         self.__karma_store = karma_store
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, event: discord.RawReactionActionEvent):
-        message = await self.get_message(event)
+        message = await self.__get_message(event)
 
-        self.__karma_store[message.author.id] += 1
+        if value := self.__emoji_value(event.emoji):
+            self.__karma_store[message.author.id] += value
 
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self, event: discord.RawReactionActionEvent):
-        message = await self.get_message(event)
-        self.__karma_store[message.author.id] -= 1
+        message = await self.__get_message(event)
+        if value := self.__emoji_value(event.emoji):
+            self.__karma_store[message.author.id] -= value
 
     @commands.Cog.listener()
     async def on_raw_reaction_clear(self, event: discord.RawReactionActionEvent):
@@ -31,13 +41,30 @@ class Listeners(commands.Cog):
         pass
 
     # helper to get message from raw reaction event
-    async def get_message(
+    async def __get_message(
         self,
-        event: discord.RawReactionActionEvent
-        | discord.RawReactionClearEvent
-        | discord.RawReactionClearEmojiEvent,
+        event: RawReact,
     ) -> discord.Message:
         channel = self.__bot.get_channel(event.channel_id)
         assert isinstance(channel, discord.abc.Messageable)
         message = await channel.fetch_message(event.message_id)
         return message
+
+    def __emoji_value(self, emoji: discord.PartialEmoji) -> Optional[int]:
+        karma_map = self.__bot.config.REACTIONS
+
+        if emoji.is_custom_emoji():
+            id = emoji.id
+            assert id is not None
+            name = emoji.name
+
+            if value := karma_map.get(id):
+                return value
+            elif value := karma_map.get(name):
+                return value
+            else:
+                return None
+
+        elif emoji.is_unicode_emoji():
+            if value := karma_map.get(emoji.name):
+                return value

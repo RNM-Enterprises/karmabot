@@ -1,2 +1,11 @@
 bot-token: bot_token_goes_here
-owners: [1234, 5678] # user IDs of bot owners with admin perms
+owners: # user IDs of bot owners with admin perms
+  - 1234
+  - 5678
+
+# emoji that should be used for karma
+# either a unicode emoji, name of reaction, or emoji ID
+# mapped to karma value
+emoji:
+  😊: 1
+  1000161402704633956: -5
