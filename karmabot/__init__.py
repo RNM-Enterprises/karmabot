@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 import logging
 from karmabot.config import Config
+from karma_store import KarmaStore
 
 
 class KarmaBot(commands.Bot):
@@ -17,6 +18,7 @@ class KarmaBot(commands.Bot):
         self.__init_extensions = extensions
         self.config = Config(config)
         self.owner_ids = self.config.OWNERS
+        self.karma_store = KarmaStore("karmastore.pkl")
 
     # do anything we need to prior to startup
     async def setup_hook(self) -> None:

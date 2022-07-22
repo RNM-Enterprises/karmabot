@@ -1,6 +1,5 @@
 from discord.ext import commands
 import discord
-from .karma_store import KarmaStore
 from karmabot import KarmaBot
 from typing import Optional
 import logging
@@ -16,22 +15,21 @@ RawReact = (
 
 
 class Listeners(commands.Cog):
-    def __init__(self, bot: KarmaBot, karma_store: KarmaStore):
+    def __init__(self, bot: KarmaBot):
         self.__bot = bot
-        self.__karma_store = karma_store
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, event: discord.RawReactionActionEvent):
         message = await self.__get_message(event)
 
         if value := self.__emoji_value(event.emoji):
-            self.__karma_store[message.author.id] += value
+            self.__bot.karma_store[message.author.id] += value
 
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self, event: discord.RawReactionActionEvent):
         message = await self.__get_message(event)
         if value := self.__emoji_value(event.emoji):
-            self.__karma_store[message.author.id] -= value
+            self.__bot.karma_store[message.author.id] -= value
 
     @commands.Cog.listener()
     async def on_raw_reaction_clear(self, event: discord.RawReactionClearEvent):
