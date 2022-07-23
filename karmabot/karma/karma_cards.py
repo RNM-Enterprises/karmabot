@@ -15,11 +15,11 @@ async def get_karma_card(user: discord.abc.User, user_karma: int) -> discord.Fil
     card.paste((40, 40, 40), (0, 0, card.size[0], card.size[1]))
 
     font = ImageFont.truetype(font="arial.ttf", size=54)
-    card_drawer.text((320, 84), str(user), font=font, fill=(245, 249, 215))
+    card_drawer.text((340, 64), str(user), font=font, fill=(245, 249, 215))
 
     font = ImageFont.truetype(font="arial.ttf", size=74)
     card_drawer.text(
-        (320, card.size[1] - (74 + 44)),
+        (340, card.size[1] - (94 + 44)),
         f"karma: {user_karma}",
         font=font,
         fill=(250, 219, 47),
