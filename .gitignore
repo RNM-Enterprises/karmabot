@@ -4,3 +4,4 @@ __pycache__
 *_cache
 *.pkl
 config.yaml
+.vscode
