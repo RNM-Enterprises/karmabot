@@ -30,7 +30,6 @@ class UserCommands(commands.Cog):
             await ctx.reply(
                 file=await get_karma_card(member, self.karma_store[member.id])
             )
-        
 
     @commands.command()
     async def leaderboard(self, ctx: commands.Context):
