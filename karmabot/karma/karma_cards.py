@@ -1,11 +1,12 @@
-import io
+from io import BytesIO
 import discord
 import discord.ext.commands as commands
 import numpy as np
-from .karma_store import KarmaStore
 from PIL import Image, ImageDraw, ImageFont
+from requests import request
+import requests
 
-async def get_karma_card(user: discord.abc.User,user_karma:int ):
+async def get_karma_card(user: discord.abc.User,user_karma ):
         '''
         returns karma card for a user as an Image
         '''
@@ -17,9 +18,9 @@ async def get_karma_card(user: discord.abc.User,user_karma:int ):
         card_drawer.text((320,84), str(user),font=font,fill=(245,249,215))
         
         font = ImageFont.truetype(font='arial.ttf',size=74)
-        card_drawer.text((320,card.size[1] -(74+44)), f'Karma: {user_karma}',font=font,fill=(250,219,47))
+        card_drawer.text((320,card.size[1] -(74+44)), f'karma: {user_karma}',font=font,fill=(250,219,47))
         
-        avatar = Image.open(await user.display_avatar.read()).convert('RGB').resize((234,234))
+        avatar = Image.open(BytesIO(requests.get(user.display_avatar.url).content)).convert('RGB').resize((234,234))
         avatar_arr = np.array(avatar)
         
         lum_img = Image.new('L',(avatar.size[0],avatar.size[1]),0)
@@ -31,7 +32,5 @@ async def get_karma_card(user: discord.abc.User,user_karma:int ):
         
         card.paste(framed_avatar,(int((282-234)/2),int((282-234)/2)),mask=framed_avatar)
 
-        bytes_array = io.BytesIO()
 
-        card.save(bytes_array,format='PNG')
-        return bytes_array
+        return card
