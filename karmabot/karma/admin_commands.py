@@ -1,12 +1,11 @@
 import discord.ext.commands as commands
 
-from .karma_store import KarmaStore
+from karmabot import KarmaBot
 
 
 class AdminCommands(commands.Cog):
-    def __init__(self, bot: commands.Bot, karma_store: KarmaStore):
+    def __init__(self, bot: KarmaBot):
         self.bot = bot
-        self.karma_store = karma_store
 
     @commands.command(hidden=True)
     @commands.is_owner()

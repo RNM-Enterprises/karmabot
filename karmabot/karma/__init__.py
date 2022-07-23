@@ -1,14 +1,12 @@
-from .karma_store import KarmaStore
+import imp
 from .admin_commands import AdminCommands
 from .listeners import Listeners
 from .user_commands import UserCommands
-from discord.ext.commands import Bot
+from karmabot import KarmaBot
+from karma_store import KarmaStore
 
 
-async def setup(bot: Bot):
-
-    karma_store = KarmaStore("karmastore.pkl")
-
-    await bot.add_cog(AdminCommands(bot, karma_store))
-    await bot.add_cog(UserCommands(bot, karma_store))
-    await bot.add_cog(Listeners(bot, karma_store))
+async def setup(bot: KarmaBot):
+    await bot.add_cog(AdminCommands(bot))
+    await bot.add_cog(UserCommands(bot))
+    await bot.add_cog(Listeners(bot))
