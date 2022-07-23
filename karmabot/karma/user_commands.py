@@ -22,9 +22,7 @@ class UserCommands(commands.Cog):
             pic_bytes = BytesIO()
             picture.show()
             picture.save(pic_bytes,format="PNG")
-            with open("./resources/template.PNG","wb") as f:
-                f.write(pic_bytes.getbuffer())
-            await ctx.reply(file=discord.File("./resources/template.PNG"))
+            await ctx.reply(file=discord.File(pic_bytes))
         elif isinstance(member,discord.Member):
             picture = await get_karma_card(ctx.author,self.karma_store[member.id])
             await ctx.reply(file=discord.File("./resources/template.PNG"))
