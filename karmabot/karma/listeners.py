@@ -58,7 +58,7 @@ class Listeners(commands.Cog):
         return message
 
     def __emoji_value(self, emoji: discord.PartialEmoji) -> Optional[int]:
-        karma_map = self.__bot.config.EMOJI
+        karma_map = self.__bot.config.emoji
 
         if emoji.is_custom_emoji():
             id = emoji.id
