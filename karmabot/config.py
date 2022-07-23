@@ -10,7 +10,7 @@ class Config:
 
         self.BOT_TOKEN: str = parsed.get("bot-token")
         self.OWNERS: list[int] = parsed.get("owners")
-        self.REACTIONS: dict[str | int, int] = parsed.get("emoji")
+        self.EMOJI: dict[str | int, int] = parsed.get("emoji")
 
         self.check_config()
 
@@ -24,7 +24,7 @@ class Config:
             if type(id) is not int or not re.match(r"^\d{17,18}$", str(id)):
                 logger.warn(f"User ID {id} is not a valid discord user id")
 
-        for (emoji, value) in self.REACTIONS.items():
+        for (emoji, value) in self.EMOJI.items():
             if not (isinstance(emoji, str) or isinstance(emoji, int)):
                 logger.warn(f"Emoji {emoji} is not a valid discord emoji")
             if type(value) is not int:
