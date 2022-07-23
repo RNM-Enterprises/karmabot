@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 import logging
 from karmabot.config import Config
-from karma import KarmaStore
+from karma_store import KarmaStore
 
 
 class KarmaBot(commands.Bot):
