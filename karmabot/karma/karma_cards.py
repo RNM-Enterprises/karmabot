@@ -5,6 +5,8 @@ from PIL import Image, ImageDraw, ImageFont
 import requests
 from os import SEEK_SET
 
+FONT = "Arial"
+
 
 async def get_karma_card(user: discord.abc.User, user_karma: int) -> discord.File:
     """
@@ -14,10 +16,10 @@ async def get_karma_card(user: discord.abc.User, user_karma: int) -> discord.Fil
     card_drawer = ImageDraw.Draw(card)
     card.paste((40, 40, 40), (0, 0, card.size[0], card.size[1]))
 
-    font = ImageFont.truetype(font="arial.ttf", size=54)
+    font = ImageFont.truetype(font=FONT, size=54)
     card_drawer.text((340, 64), str(user), font=font, fill=(245, 249, 215))
 
-    font = ImageFont.truetype(font="arial.ttf", size=74)
+    font = ImageFont.truetype(font=FONT, size=74)
     card_drawer.text(
         (340, card.size[1] - (94 + 44)),
         f"karma: {user_karma}",
