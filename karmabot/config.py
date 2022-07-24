@@ -1,6 +1,7 @@
 import yaml
 import logging
 import re
+from aiofile import async_open
 
 
 class Config:
@@ -36,12 +37,12 @@ class Config:
                     f"Karma value {value} is not a valid value (expected int)"
                 )
 
-    def save(self):
+    async def save(self):
         config_map = {
             attr.lower(): self.__getattribute__(attr) for attr in self.__slots__[2:]
         }
-        with open(self.__filename, "w") as f:
-            yaml.dump(
-                config_map, stream=f, default_flow_style=False, allow_unicode=True
+        async with async_open(self.__filename, "w") as f:
+            await f.write(
+                yaml.dump(config_map, default_flow_style=False, allow_unicode=True)
             )
         self.__logger.info(f"Saved config to {self.__filename}")

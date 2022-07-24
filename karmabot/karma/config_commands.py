@@ -36,7 +36,7 @@ class ConfigCommands(commands.Cog):
         else:  # unreachable
             assert False
 
-        self.__bot.config.save()
+        await self.__bot.config.save()
         await ctx.reply(f"Emoji {str(emoji)} has been given a karma value of {value}")
 
     @emoji.command()
@@ -64,5 +64,5 @@ class ConfigCommands(commands.Cog):
         else:  # unreachable
             assert False
 
-        self.__bot.config.save()
+        await self.__bot.config.save()
         await ctx.reply(f"Emoji {str(emoji)} has been given a karma value of 0")
