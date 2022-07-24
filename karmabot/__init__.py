@@ -16,6 +16,7 @@ class KarmaBot(commands.Bot):
     ):
         super().__init__(*args, **kwargs)
         self.__init_extensions = extensions
+        self.__config_filename = config
         self.config = Config(config)
         self.owner_ids = self.config.OWNERS
         self.karma_store = KarmaStore("karmastore.pkl")
@@ -26,6 +27,9 @@ class KarmaBot(commands.Bot):
 
         for e in self.__init_extensions:
             await self.load_extension(e)
+
+    async def reload_config(self):
+        self.config = Config(self.__config_filename)
 
 
 async def main():
