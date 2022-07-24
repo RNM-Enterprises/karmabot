@@ -5,7 +5,7 @@ from .emoji import UnicodeEmoji, emoji_value
 from functools import partial
 
 
-class ConfigCommands(commands.Cog):
+class EmojiCommands(commands.Cog):
     def __init__(self, bot: KarmaBot):
         self.__bot = bot
         self.__emoji_value = partial(emoji_value, self.__bot.config.emoji)
