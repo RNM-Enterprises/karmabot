@@ -1,3 +1,4 @@
+from . import utils
 from discord.ext import commands
 import discord
 from karmabot import KarmaBot
@@ -59,19 +60,4 @@ class Listeners(commands.Cog):
 
     def __emoji_value(self, emoji: discord.PartialEmoji) -> Optional[int]:
         karma_map = self.__bot.config.emoji
-
-        if emoji.is_custom_emoji():
-            id = emoji.id
-            assert id is not None
-            name = emoji.name
-
-            if value := karma_map.get(id):
-                return value
-            elif value := karma_map.get(name):
-                return value
-            else:
-                return None
-
-        elif emoji.is_unicode_emoji():
-            if value := karma_map.get(emoji.name):
-                return value
+        return utils.emoji_value(karma_map, emoji)
