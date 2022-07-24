@@ -19,6 +19,7 @@ class KarmaBot(commands.Bot):
         self.config = Config(config)
         self.owner_ids = self.config.OWNERS
         self.karma_store = KarmaStore("karmastore.pkl")
+        self.add_check(lambda ctx: ctx.guild is not None)
 
     # do anything we need to prior to startup
     async def setup_hook(self) -> None:
@@ -36,6 +37,8 @@ async def main():
     logger = logging.getLogger("discord")
     logger.setLevel(logging.INFO)
     logger.addHandler(logging.StreamHandler(stream=stdout))
+
+    # TODO: initialise these in the bot class
 
     @bot.event
     async def on_ready():
