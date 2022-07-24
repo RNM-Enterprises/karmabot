@@ -1,9 +1,9 @@
-from . import utils
 from discord.ext import commands
 import discord
 from karmabot import KarmaBot
 from typing import Optional
 import logging
+from .emoji import emoji_value
 
 # need to use raw reaction events
 # see docs (https://discordpy.readthedocs.io/en/latest/api.html#discord.on_raw_reaction_add)
@@ -60,4 +60,4 @@ class Listeners(commands.Cog):
 
     def __emoji_value(self, emoji: discord.PartialEmoji) -> Optional[int]:
         karma_map = self.__bot.config.emoji
-        return utils.emoji_value(karma_map, emoji)
+        return emoji_value(karma_map, emoji)

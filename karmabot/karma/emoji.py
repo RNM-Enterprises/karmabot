@@ -1,8 +1,9 @@
+from ast import Str
+from multiprocessing.sharedctypes import Value
 from typing import Optional
 import discord
 from emoji import is_emoji
-
-EmojiType = discord.Emoji | discord.PartialEmoji | str
+from discord.ext import commands
 
 
 def emoji_value(
@@ -34,3 +35,23 @@ def emoji_value(
         return map.get(emoji)
     else:
         raise ValueError(f"Argument {emoji} is not an emoji")
+
+
+class UnicodeEmoji:
+    def __init__(self, emoji: str):
+        if not is_emoji(emoji):
+            raise ValueError(f"{emoji} is not a value unicode emoji!")
+        self.__emoji = emoji
+
+    @classmethod
+    async def convert(cls, ctx: commands.Context, arg: str):
+        if is_emoji(arg):
+            return cls(arg)
+        else:
+            raise commands.BadArgument()
+
+    def __str__(self):
+        return self.__emoji
+
+    def __repr__(self):
+        return f"UnicodeEmoji({self.__str__()}"
