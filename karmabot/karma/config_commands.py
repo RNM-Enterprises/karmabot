@@ -26,6 +26,7 @@ class ConfigCommands(commands.Cog):
         await ctx.reply(str(self.__bot.config.emoji))
 
     @emoji.command()
+    @commands.has_guild_permissions(administrator=True)
     async def set(
         self, ctx: commands.Context, emoji: discord.Emoji | UnicodeEmoji, value: int
     ):
@@ -40,6 +41,7 @@ class ConfigCommands(commands.Cog):
         await ctx.reply(f"Emoji {str(emoji)} has been given a karma value of {value}")
 
     @emoji.command()
+    @commands.has_guild_permissions(administrator=True)
     async def unset(self, ctx: commands.Context, emoji: discord.Emoji | UnicodeEmoji):
         async def try_del(key: str | int) -> bool:
             try:
