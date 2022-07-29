@@ -1,7 +1,7 @@
 import discord.ext.commands as commands
 import discord
 from karmabot import KarmaBot
-from .emoji import UnicodeEmoji, emoji_value
+from .emoji import UnicodeEmoji, emoji_value, is_emoji
 from functools import partial
 
 
@@ -23,7 +23,28 @@ class EmojiCommands(commands.Cog):
         """
         Gets the karma values for all emoji
         """
-        await ctx.reply(str(self.__bot.config.emoji))
+        embed = discord.Embed(
+            title="All Emoji Values", description="In descending order", colour=0x8B01E6
+        )
+        guild = ctx.guild
+        assert guild is not None
+        emoji_keys = self.__bot.config.emoji.keys()
+        discord_emoji = [
+            (e, v) for e in guild.emojis if e.id in emoji_keys or e.name in emoji_keys
+        ]
+        discord_emoji.sort()
+
+        for (emoji, value) in list(self.__bot.config.emoji.items()).sort():
+            if isinstance(emoji, int):
+                discord_emoji = await guild.fetch_emoji(emoji)
+                embed.add_field(name=str(discord_emoji), value=value)
+            elif isinstance(emoji, str):
+                if is_emoji(emoji):
+                    embed.add_field(name=emoji, value=value)
+                else:
+                    embed.add_field(name=emoji, value=value)
+
+        await ctx.reply(embed=embed)
 
     @emoji.command()
     @commands.has_guild_permissions(administrator=True)
