@@ -26,6 +26,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PSWD }}
           script: |
+            export PATH="/compsoc/home/joey/.local/bin:$PATH"
             source $HOME/.poetry/env
             cd karmabot
             git switch deploy
